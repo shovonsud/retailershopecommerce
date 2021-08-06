@@ -11,10 +11,8 @@ require_once "management_panel.php";
 <h1 class="text-center p-4" style="background-color:#B6C867"><i>Items</i></h1>
     <div class="container-fluid">
         <div class="text-end">
-            <button class="btn btn-info rounded-pill" type="button" onclick="window.location.href='edititem.php'">Edit
-                Item</button>
-            <button class="btn btn-info rounded-pill" type="button" onclick="window.location.href='add_item.php'">Add
-                Item</button>
+            <a class="btn btn-info rounded-pill" href="edititem.php">Edit Item</a>
+            <a class="btn btn-info rounded-pill" href="add_item.php">Add Item</a>
         </div>
         <div class="table-responsive  px-md-5">
             <table class="table table-striped caption-top align-middle">

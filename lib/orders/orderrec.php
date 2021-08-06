@@ -11,8 +11,8 @@ require_once "management_panel.php";
     <h1 class="text-center p-4 mb-2" style="background-color:#B6C867"><i>Order Records</i></h1>
     <div class="container-fluid">
         <div class="text-end">
-            <button class="rounded-pill btn btn-success mb-1" type="button" target="_blank"
-                onclick="window.location.href='../orders/printrec.php'">Print</button>
+            <a class="rounded-pill btn btn-success mb-1" target="_blank"
+                href="../orders/printrec.php">Print</a>
         </div>
         <div class="table-responsive  px-md-5">
             <div class="overflow-auto" style="overflow:scroll;height: 480px;">

@@ -12,10 +12,8 @@ require_once "management_panel.php";
     <div class="container-fluid">
 
         <div class="text-end">
-            <button class="btn btn-info rounded-pill" type="button"
-                onclick="window.location.href='editcategory.php'">Edit Category</button>
-            <button class="btn btn-info rounded-pill" type="button"
-                onclick="window.location.href='add_category.php'">Add Category</button>
+            <a class="btn btn-info rounded-pill" href="editcategory.php">Edit Category</a>
+            <a class="btn btn-info rounded-pill" href="add_category.php">Add Category</a>
         </div>
         <div class="table-responsive  px-md-5">
             <table class="table table-striped caption-top align-middle">

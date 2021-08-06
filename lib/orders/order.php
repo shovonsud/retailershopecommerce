@@ -30,7 +30,7 @@ if (isset($_SESSION['logged_in'])) {
     <h1 class="text-center p-4" style="background-color:#B6C867"><i>New Order</i></h1>
     <?php if (isset($_SESSION['logged_in']) == false) {
     echo "<div class='text-end'>";
-    echo "<a class='btn btn-info rounded-pill' href='../../'>Shop Portal</a></div>";
+    echo "<a class='btn btn-info rounded-pill mb-2' href='../../'>Shop Portal</a></div>";
 }
 
 ?>

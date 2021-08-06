@@ -3,3 +3,7 @@
 * {
     font-family: 'Poppins', sans-serif;
 }
+
+a:hover {
+    border-color: black !important;
+}

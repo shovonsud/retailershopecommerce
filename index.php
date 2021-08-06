@@ -12,10 +12,10 @@
     <title>Portal</title>
     <style>
         #mgmtport:hover{
-            background-color: #FB3640 !important;
+            background-color:#A2DBFA !important;
         }
         #custport:hover{
-            background-color: #FF67E7 !important;
+            background-color:#FFE867 !important;
         }
         </style>
 </head>
