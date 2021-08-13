@@ -36,11 +36,11 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
                 header("Location:../management");
                 exit();
             } else {
-                header("Location: login.php?error=Incorect Username or password");
+                header("Location: login.php?error=Incorrect Username or password");
                 exit();
             }
         } else {
-            header("Location: login.php?error=Incorect Username or password");
+            header("Location: login.php?error=Incorrect Username or password");
             exit();
         }
     }
