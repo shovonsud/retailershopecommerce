@@ -42,11 +42,19 @@ if (isset($_POST["submit8"]) == true) {
         $row = $result->fetch_assoc();?>
                 <hr>
                 <form method="POST" action="updateitem.php">
-                    <div class="row">
+                    <div class="row align-items-center">
                         <div class='px-1 col-6 mb-3'>
                             <label>Item ID</label>
-                            <input class="form-control border border-dark rounded" type='number' name='itemid' value=<?php echo "$x"; ?> readonly
-                                style="cursor:no-drop;background-color:#E1E8EB">
+                            <input class="form-control border border-dark rounded" type='number' name='itemid'
+                                value=<?php echo "$x"; ?> readonly style="cursor:no-drop;background-color:#E1E8EB">
+                        </div>
+                        <div class="px-1 col-6 mb-3">
+                            <img class="border border-dark rounded mx-auto d-block mb-2" alt="Item Picture Missing"
+                                src=<?php echo "../../assets/images/products/$x"; ?> id="itempic" name="itempic"
+                                height="150" width="150" />
+                            <input class="form-control form-control-sm" type="file" accept="image/*"
+                                name="updateitempic" id="updateitempic" onchange="preview_image(event)" />
+
                         </div>
                     </div>
                     <div class='row'>
@@ -79,13 +87,15 @@ $isql = "SELECT * FROM category";
                     <div class='row'>
                         <div class='px-1 col-6 mb-3'>
                             <label>New Item Rate (₹)</label>
-                            <input class="form-control border border-dark rounded" type='number' name='itemrate' value=<?php echo "$price"; ?> required>
+                            <input class="form-control border border-dark rounded" type='number' name='itemrate'
+                                value=<?php echo "$price"; ?> required>
                             <?php
 $qu = (int) $row['quantity'];?>
                         </div>
                         <div class='px-1 col-6 mb-3'>
                             <label>New Item Quantity</label>
-                            <input class="form-control border border-dark rounded" type='number' name='itemq' value=<?php echo "$qu"; ?> required>
+                            <input class="form-control border border-dark rounded" type='number' name='itemq'
+                                value=<?php echo "$qu"; ?> required>
                         </div>
                     </div>
                     <div class='row'>
@@ -120,6 +130,16 @@ echo "<button class='col-12 btn btn-primary' name='submit4' type='submit' value=
     </div>
     <?php
 require_once "footer.php";?>
+    <script type='text/javascript'>
+        function preview_image(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('itempic');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </body>
 
 </html>
