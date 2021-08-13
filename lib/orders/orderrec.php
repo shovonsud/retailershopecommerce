@@ -11,26 +11,25 @@ require_once "management_panel.php";
     <h1 class="text-center p-4 mb-2" style="background-color:#B6C867"><i>Order Records</i></h1>
     <div class="container-fluid">
         <div class="text-end">
-            <a class="rounded-pill btn btn-success mb-1" target="_blank"
-                href="../orders/printrec.php">Print</a>
+            <a class="rounded-pill btn btn-success mb-1" target="_blank" href="../orders/printrec.php">Print</a>
         </div>
-        <div class="table-responsive  px-md-5">
-            <div class="overflow-auto" style="overflow:scroll;height: 480px;">
-            <table class="rounded border border-dark table table-bordered table-striped caption-top align-middle">
-                <thead>
-                    <tr>
-                        <th>Order Id</th>
-                        <th>Customer Name</th>
-                        <th>Customer Address</th>
-                        <th>Customer Phone</th>
-                        <th>Item Name</th>
-                        <th>Quantity</th>
-                        <th>Total (<i class="fas fa-rupee-sign"></i>)</th>
-                        <th>TimeStamp</th>
-                    </tr>
-                </thead>
-                <tbody class="overflow-auto" style="overflow:scroll;height: 480px;">
-                    <?php
+        <div class="px-md-5">
+            <div class="table-responsive tablerep">
+                <table class="table table-striped table-bordered caption-top align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Order Id</th>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Customer Address</th>
+                            <th scope="col">Customer Phone</th>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total (<i class="fas fa-rupee-sign"></i>)</th>
+                            <th scope="col">TimeStamp</th>
+                        </tr>
+                    </thead>
+                    <tbody class="overflow-auto" style="overflow:scroll;height: 480px;">
+                        <?php
 $sql = "SELECT a.*,b.item_name FROM orders a,product b WHERE a.cust_item_id=b.item_id ORDER BY a.order_id ASC";
 $result = $db_conn->query($sql);
 if ($result->num_rows > 0) {
@@ -40,11 +39,12 @@ if ($result->num_rows > 0) {
 } else {echo "0 results";}
 $db_conn->close();
 ?>
-                </tbody>
-            </table>
-</div>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <?php
+    </div>
+    <?php
 require_once "footer.php";?>
     </div>
 

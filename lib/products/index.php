@@ -8,27 +8,28 @@ require_once "management_panel.php";
 </head>
 
 <body>
-<h1 class="text-center p-4" style="background-color:#B6C867"><i>Items</i></h1>
+    <h1 class="text-center p-4" style="background-color:#B6C867"><i>Items</i></h1>
     <div class="container-fluid">
         <div class="text-end">
             <a class="btn btn-info rounded-pill" href="edititem.php">Edit Item</a>
             <a class="btn btn-info rounded-pill" href="add_item.php">Add Item</a>
         </div>
-        <div class="table-responsive  px-md-5">
-            <table class="table table-striped caption-top align-middle">
-                <caption>List of Items</caption>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Item Name</th>
-                        <th>Category</th>
-                        <th>Unit Price<i class="fas fa-rupee-sign"></i></th>
-                        <th>Quantity</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
+        <div class="px-md-5">
+            <div class="table-responsive">
+                <table class="table table-striped caption-top align-middle">
+                    <caption>List of Items</caption>
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Unit Price (<i class="fas fa-rupee-sign"></i>)</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
 $sql = "SELECT a.*,b.name FROM product a,category b WHERE a.cat_id=b.id ORDER BY a.item_id ASC;";
 $result = $db_conn->query($sql);
 if ($result->num_rows > 0) {
@@ -43,8 +44,9 @@ if ($result->num_rows > 0) {
 } else {echo "0 results";}
 $db_conn->close();
 ?>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>

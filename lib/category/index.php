@@ -8,25 +8,26 @@ require_once "management_panel.php";
 </head>
 
 <body>
-<h1 class="text-center p-4" style="background-color:#B6C867"><i>Categories</i></h1>
+    <h1 class="text-center p-4" style="background-color:#B6C867"><i>Categories</i></h1>
     <div class="container-fluid">
 
         <div class="text-end">
             <a class="btn btn-info rounded-pill" href="editcategory.php">Edit Category</a>
             <a class="btn btn-info rounded-pill" href="add_category.php">Add Category</a>
         </div>
-        <div class="table-responsive  px-md-5">
-            <table class="table table-striped caption-top align-middle">
-                <caption>List of catogories</caption>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Category</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
+        <div class="px-md-5">
+            <div class="table-responsive">
+                <table class="table table-striped caption-top align-middle">
+                    <caption>List of catogories</caption>
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
 $sql = "SELECT * FROM category";
 $result = $db_conn->query($sql);
 if ($result->num_rows > 0) {
@@ -41,8 +42,9 @@ if ($result->num_rows > 0) {
 } else {echo "0 results";}
 $db_conn->close();
 ?>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <?php
 require_once "footer.php";?>

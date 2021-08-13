@@ -8,26 +8,27 @@ require_once "management_panel.php";
 </head>
 
 <body>
-<h1 class="text-center p-4" style="background-color:#B6C867"><i>Users</i></h1>
+    <h1 class="text-center p-4" style="background-color:#B6C867"><i>Users</i></h1>
     <div class="container-fluid">
         <div class="text-end">
-        <a class="btn btn-info rounded-pill" href="../management/register.php">Add
-            User</a>
-            </div>
-        <div class="table-responsive  px-md-5">
-            <table class="table table-striped caption-top align-middle">
-            <caption>List of users</caption>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Username</th>
-                        <th>Email-ID</th>
-                        <th>Phone No.</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
+            <a class="btn btn-info rounded-pill" href="../management/register.php">Add
+                User</a>
+        </div>
+        <div class="px-md-5">
+            <div class="table-responsive">
+                <table class="table table-striped caption-top align-middle">
+                    <caption>List of users</caption>
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Email-ID</th>
+                            <th scope="col">Phone No.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
 $sql = "SELECT * FROM user";
 $result = $db_conn->query($sql);
 if ($result->num_rows > 0) {
@@ -37,8 +38,9 @@ if ($result->num_rows > 0) {
 } else {echo "0 results";}
 $db_conn->close();
 ?>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <?php
 require_once "footer.php";?>
