@@ -16,7 +16,29 @@ if (isset($_SESSION['logged_in'])) {
         $catid = (int) validate($_POST['newcatset']);
         $uprice = validate($_POST['itemrate']);
         $quant = validate($_POST['itemq']);
-        $sql = "UPDATE product SET item_name = '$itemname',cat_id=$catid,unit_price=$uprice,quantity=$quant, item_status=$itemstatus WHERE item_id=$id";
+        $sql = "";
+        if (isset($_FILES["changeitempic"])) {
+            $newfilename = "Item" . $id;
+            $extension = pathinfo($_FILES["changeitempic"]["name"], PATHINFO_EXTENSION);
+            $basename = $newfilename . "." . $extension;
+            $source = $_FILES["changeitempic"]["tmp_name"];
+            $destination = "../../assets/images/products/{$basename}";
+            $sql2 = "SELECT picturefilepath from product where item_id=$id";
+            $result = $db_conn->query($sql2);
+            $imgfilepath = "";
+            if ($result->num_rows === 1) {
+                while ($row = $result->fetch_assoc()) {
+                    $imgfilepath = $row['picturefilepath'];
+                }
+            }
+            if (file_exists($imgfilepath)) {
+                unlink($imgfilepath);
+            }
+            $sql = "UPDATE product SET item_name = '$itemname',picturefilepath='$destination',cat_id=$catid,unit_price=$uprice,quantity=$quant, item_status=$itemstatus WHERE item_id=$id";
+            move_uploaded_file($source, $destination);
+        } else {
+            $sql = "UPDATE product SET item_name = '$itemname',cat_id=$catid,unit_price=$uprice,quantity=$quant, item_status=$itemstatus WHERE item_id=$id";
+        }
         if ($db_conn->query($sql)) {
             ?><script>
             window.alert("Item Updated Successfully.");

@@ -13,7 +13,7 @@ require_once "management_panel.php";
             <h1 class="text-center p-4" style="background-color:#B6C867"><i>Edit Item</i></h1>
             <section class="p-4 col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4 col-xxl-4 rounded"
                 style="background-color:#DBE6FD">
-                <form method="POST" action="#" style="">
+                <form method="POST" action="#" enctype="multipart/form-data">
                     <div class="row">
                         <div class="px-1 col-12  mb-3">
                             <label>Select Item</label>
@@ -41,7 +41,7 @@ if (isset($_POST["submit8"]) == true) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();?>
                 <hr>
-                <form method="POST" action="updateitem.php">
+                <form method="POST" action="updateitem.php" enctype="multipart/form-data">
                     <div class="row align-items-center">
                         <div class='px-1 col-6 mb-3'>
                             <label>Item ID</label>
@@ -50,11 +50,15 @@ if (isset($_POST["submit8"]) == true) {
                         </div>
                         <div class="px-1 col-6 mb-3">
                             <img class="border border-dark rounded mx-auto d-block mb-2" alt="Item Picture Missing"
-                                src=<?php echo "../../assets/images/products/$x"; ?> id="itempic" name="itempic"
+                                src="<?php echo $row['picturefilepath']; ?>" id="itempicpreview" name="itempicpreview"
                                 height="150" width="150" />
-                            <input class="form-control form-control-sm" type="file" accept="image/*"
-                                name="updateitempic" id="updateitempic" onchange="preview_image(event)" />
-
+                            <div class="d-flex justify-content-center">
+                                <label for="pic_upload" class="btn btn-info">
+                                    <i class="fas fa-file-image"></i> Change Picture
+                                </label>
+                                <input id="pic_upload" class="pic_upload" name="changeitempic" type="file"
+                                    accept="image/*" onchange="preview_image(event)" />
+                            </div>
                         </div>
                     </div>
                     <div class='row'>
@@ -78,7 +82,6 @@ $isql = "SELECT * FROM category";
             } else {
                 echo "<option value='" . $irow['id'] . "'>" . $irow['name'] . "</option>";
             }
-
         }
         echo "</select>";
         $price = (int) $row['unit_price'];?>
@@ -130,16 +133,6 @@ echo "<button class='col-12 btn btn-primary' name='submit4' type='submit' value=
     </div>
     <?php
 require_once "footer.php";?>
-    <script type='text/javascript'>
-        function preview_image(event) {
-            var reader = new FileReader();
-            reader.onload = function () {
-                var output = document.getElementById('itempic');
-                output.src = reader.result;
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    </script>
 </body>
 
 </html>

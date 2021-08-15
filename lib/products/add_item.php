@@ -12,12 +12,24 @@ require_once "management_panel.php";
         <section class="row justify-content-center">
             <h1 class="text-center p-4 mb-5" style="background-color:#B6C867"><i>Add Item</i></h1>
             <section class="col-md-8 col-lg-8 col-xl-6 col-xxl-6 rounded" style="background-color:#DBE6FD">
-                <form class="p-3" method="POST" action="newitem.php" style="">
+                <form class="p-3" method="POST" action="newitem.php" enctype="multipart/form-data">
                     <div class="row">
                         <div class="p-1 col-7 col-sm-5 mb-3">
                             <label>Item ID</label>
                             <input class="form-control border border-dark rounded" type="number" readonly name="itemid"
                                 placeholder="System generated" style="cursor:no-drop;">
+                        </div>
+                        <div class="px-1 col-6 mb-3 justify-content-center text-center">
+                            <img class="border border-dark rounded mx-auto d-block mb-2" alt="Upload Picture"
+                                id="itempicpreview" name="itempicpreview" height="150" width="150" />
+                            <div class="d-flex justify-content-center">
+                                <label for="pic_upload" class="btn btn-info">
+                                    <i class="fas fa-file-image"></i> Upload
+                                </label>
+                                <input id="pic_upload" class="pic_upload" name="itempic" type="file" accept="image/*"
+                                    required onchange="preview_image(event)" />
+                                <p id="picuploadalert" class="ms-1 fw-light fst-italic">*Required</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -78,6 +90,5 @@ echo "</select>";
     <?php
 require_once "footer.php";?>
 </body>
-
 
 </html>

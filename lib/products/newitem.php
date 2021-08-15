@@ -15,7 +15,24 @@ if (isset($_SESSION['logged_in'])) {
         $catset = (int) $_POST['catset'];
         $unit_price = $_POST['unit_price'];
         $quantity = $_POST['quantity'];
-        $sql = "INSERT INTO product VALUES ('','$itemname',$catset,$unit_price,$quantity,$itemstatus)";
+        /* Picture Upload */
+        $sql = "select max(item_id) as lastid from product";
+        $result = mysqli_query($db_conn, $sql);
+        if (mysqli_num_rows($result)) {
+            $row = mysqli_fetch_assoc($result);
+        }
+        $destination = "";
+        $itemid = $row['lastid'] + 1;
+        if (isset($_FILES["itempic"])) {
+            $newfilename = "Item" . $itemid;
+            $extension = pathinfo($_FILES["itempic"]["name"], PATHINFO_EXTENSION); // jpg
+            $basename = $newfilename . "." . $extension; // filename.jpg
+            $source = $_FILES["itempic"]["tmp_name"];
+            $destination = "../../assets/images/products/{$basename}";
+            /* move the file */
+            move_uploaded_file($source, $destination);
+        }
+        $sql = "INSERT INTO product VALUES ('','$itemname','$destination',$catset,$unit_price,$quantity,$itemstatus)";
         if ($db_conn->query($sql)) {
             ?><script>
             window.alert("New Item added.");
