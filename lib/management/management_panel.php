@@ -18,6 +18,7 @@ if (isset($_SESSION['logged_in'])) {
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href='../../assets/style/style.css' rel='stylesheet'>
   <link rel="icon" type="image/png" href="../../assets/images/icon.png">
+  <script src="../../assets/js/app.js"></script>
 </head>
 
 <body class="">
@@ -55,8 +56,8 @@ if (isset($_SESSION['logged_in'])) {
             </li>
           </ul>
           <div class="d-flex flex-row-reverse text-end bg-warning text-dark rounded">
-            <button type="button" class="btn btn-primary" title="Logout" onclick="window.location.href='../management/logout.php'"><i
-                class="fas fa-sign-out-alt"></i></button>
+            <button type="button" class="btn btn-primary" title="Logout"
+              onclick="window.location.href='../management/logout.php'"><i class="fas fa-sign-out-alt"></i></button>
             <h6 class="p-2">Welcome<?php echo "<br>" . $_SESSION['name']; ?></h6>
           </div>
         </div>
@@ -67,7 +68,6 @@ if (isset($_SESSION['logged_in'])) {
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
 
   </script>
-
 </body>
 
 </html>
