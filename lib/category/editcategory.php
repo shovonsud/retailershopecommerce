@@ -46,15 +46,14 @@ if (isset($_POST["submit3"]) == true) {
                         <div class="row">
                             <div class='px-1 col-12 mb-3'>
                                 <label>Category ID</label>
-                                <input class='form-control' type='number' name='catid' readonly value=<?php echo "$x"; ?>>
+                                <input class='form-control' type='number' name='catid' readonly value=<?php echo $x; ?>>
                             </div>
                         </div>
                         <div class='row'>
                             <div class='px-1 col-12 mb-3'>
                                 <label>New Category Name</label>
-                                <?php
-echo "<input class='form-control' type='text' name='newcatname' required value='" . $row['name'] . "' placeholder='" . $row['name'] . "'>";
-        ?>
+                                <input class="form-control" type="text" name="newcatname" required
+                                    value="<?php echo $row["name"]; ?>">
                             </div>
                         </div>
                         <div class='row'>
@@ -64,18 +63,29 @@ echo "<input class='form-control' type='text' name='newcatname' required value='
 echo "<select class='form-select' name='newstat' required>";
         if ($row["status"] == 1) {
             $catstat = "Active";
-
-            echo "<option value='" . $row[' status'] . "' selected>$catstat</option>";
-            echo "<option value='2'>Disabled</option>";} else { $catstat = "Disabled";
-            echo "<option value='1'>Active</option>";
-            echo "<option value='" .
-                $row['status'] . "' selected>$catstat</option>";}
-        echo "</select>";
-        echo "</div></div>";
-        echo "<button class='col-12 btn btn-primary submitnewcat' name='submit4' type='submit' value='Submit'>Update</button>"
-        ;
-        echo "</form>";
-        echo "</div>";}} ?>
+            ?>
+                                <option value="<?php echo $row["status"]; ?>" selected><?php echo $catstat; ?></option>
+                                <option value="2">Disabled</option>
+                                <?php
+} else {
+            $catstat = "Disabled";
+            ?>
+                                <option value="1">Active</option>
+                                <option value="<?php echo $row['status']; ?>" selected>$catstat</option>
+                                <?php
+}
+        ?>
+                                </select>
+                            </div>
+                        </div>
+                        <button class='col-12 btn btn-primary submitnewcat' name='submit4' type='submit'
+                            value='Submit'>Update</button>
+                    </form>
+                </div>
+                <?php
+}
+}
+?>
             </section>
         </section>
     </div>

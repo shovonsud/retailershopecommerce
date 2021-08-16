@@ -10,14 +10,13 @@ require_once "management_panel.php";
 <body>
     <h1 class="text-center p-4" style="background-color:#B6C867"><i>Items</i></h1>
     <div class="container-fluid">
-        <div class="text-end">
+        <div class="text-end mb-1">
             <a class="btn btn-info rounded-pill" href="edititem.php">Edit Item</a>
             <a class="btn btn-info rounded-pill" href="add_item.php">Add Item</a>
         </div>
         <div class="px-md-5">
-            <div class="table-responsive">
-                <table class="table table-striped caption-top align-middle">
-                    <caption>List of Items</caption>
+            <div class="table-responsive tablerep">
+                <table class="table table-striped table-hover align-middle">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">Id</th>
@@ -39,8 +38,19 @@ if ($result->num_rows > 0) {
         } else {
             $itemstat = "Disabled";
         }
-        echo "<tr><td>" . $row["item_id"] . "</td><td>" . $row["item_name"] . "</td><td>" . $row["name"] . "</td><td>" . $row["unit_price"] . "</td><td>" . $row["quantity"] . "</td><td>" . $itemstat . "</td></tr>";
-    }
+        ?>
+                        <tr>
+                            <td><?php echo $row['item_id']; ?></td>
+                            <td class="d-flex"><img class="border" src="<?php echo $row['picturefilepath']; ?>" width="50" height="50" />
+                                <div class="ms-2"><?php echo $row['item_name']; ?></div>
+                            </td>
+                            <td><?php echo $row['name']; ?></td>
+                            <td><?php echo $row['unit_price']; ?></td>
+                            <td><?php echo $row['quantity']; ?></td>
+                            <td><?php echo $itemstat; ?></td>
+                        </tr>
+                        <?php
+}
 } else {echo "0 results";}
 $db_conn->close();
 ?>
