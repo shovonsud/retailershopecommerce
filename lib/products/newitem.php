@@ -11,6 +11,7 @@ if (isset($_SESSION['logged_in'])) {
             return $data;
         }
         $itemname = validate($_POST['itemname']);
+        $itemvarint = validate($_POST['itemvariant']);
         $itemstatus = $_POST['itemstatus'];
         $catset = (int) $_POST['catset'];
         $unit_price = $_POST['unit_price'];
@@ -32,7 +33,7 @@ if (isset($_SESSION['logged_in'])) {
             /* move the file */
             move_uploaded_file($source, $destination);
         }
-        $sql = "INSERT INTO product VALUES ('','$itemname','$destination',$catset,$unit_price,$quantity,$itemstatus)";
+        $sql = "INSERT INTO product VALUES ('','$itemname','$itemvarint','$destination',$catset,$unit_price,$quantity,$itemstatus)";
         if ($db_conn->query($sql)) {
             ?><script>
             window.alert("New Item added.");

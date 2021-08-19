@@ -40,6 +40,13 @@ require_once "management_panel.php";
                         </div>
                     </div>
                     <div class="row">
+                        <div class="px-1 col-6 mb-3">
+                            <label>Variant</label>
+                            <input class="form-control border border-dark rounded" type="text" name="itemvariant"
+                                required placeholder="Variant" />
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="px-1 col-12 mb-3">
                             <label>Select Category</label>
                             <?php

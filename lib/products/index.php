@@ -21,6 +21,7 @@ require_once "management_panel.php";
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Item Name</th>
+                            <th scope="col">Variant</th>
                             <th scope="col">Category</th>
                             <th scope="col">Unit Price (<i class="fas fa-rupee-sign"></i>)</th>
                             <th scope="col">Quantity</th>
@@ -44,6 +45,7 @@ if ($result->num_rows > 0) {
                             <td class="d-flex"><img class="border" src="<?php echo $row['picturefilepath']; ?>" width="50" height="50" />
                                 <div class="ms-2"><?php echo $row['item_name']; ?></div>
                             </td>
+                            <td><?php echo $row['variant']; ?></td>
                             <td><?php echo $row['name']; ?></td>
                             <td><?php echo $row['unit_price']; ?></td>
                             <td><?php echo $row['quantity']; ?></td>

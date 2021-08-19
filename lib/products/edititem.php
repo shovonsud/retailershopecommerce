@@ -23,7 +23,7 @@ $result = mysqli_query($db_conn, $sql);
 echo "<select class='form-select' name='itemset' required>";
 echo "<option value=''>Select</option>";
 while ($row = $result->fetch_assoc()) {
-    echo "<option value='" . $row['item_id'] . "'>" . $row['item_name'] . "</option>";
+    echo "<option value='" . $row['item_id'] . "'>" . $row['item_id'] . ". " . $row['item_name'] . "</option>";
 }
 echo "</select>";
 ?>
@@ -66,6 +66,14 @@ if (isset($_POST["submit8"]) == true) {
                             <label>New Item Name</label>
                             <?php
 echo "<input class='form-control border border-dark rounded' type='text' name='newitname' value='$row[item_name]' required placeholder='" . $row['item_name'] . "'>";
+        ?>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='px-1 col-6 mb-3'>
+                            <label>New Variant</label>
+                            <?php
+echo "<input class='form-control border border-dark rounded' type='text' name='newitvar' value='$row[variant]' required placeholder='" . $row['variant'] . "'>";
         ?>
                         </div>
                     </div>
