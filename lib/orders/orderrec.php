@@ -1,5 +1,6 @@
 <?php
 require_once "management_panel.php";
+require_once "../orders/cartsystem.php";
 ?>
 <!DOCTYPE html>
 
@@ -15,7 +16,7 @@ require_once "management_panel.php";
         </div>
         <div class="px-md-5">
             <div class="table-responsive tablerep">
-                <table class="table table-striped align-middle">
+                <table class="table table-striped table-bordered border-dark align-middle">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">Order Id</th>
@@ -30,19 +31,47 @@ require_once "management_panel.php";
                     </thead>
                     <tbody>
                         <?php
-$sql = "SELECT a.*,b.item_name FROM orders a,product b WHERE a.cust_item_id=b.item_id ORDER BY a.order_id ASC";
+$sql = "SELECT a.*,b.item_name FROM orders a,product b WHERE a.order_id=b.item_id ORDER BY a.order_id ASC";
 $result = $db_conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
+        $cartitems = json_decode($row['order_cart']);
         ?>
                         <tr>
                             <td><?php echo $row["order_id"]; ?></td>
                             <td><?php echo $row["cust_name"]; ?></td>
                             <td><?php echo $row["cust_addr"]; ?></td>
                             <td><?php echo $row["cust_phn"]; ?></td>
-                            <td><?php echo $row["item_name"]; ?></td>
-                            <td class="text-center"><?php echo $row["cust_quant"]; ?></td>
-                            <td class="text-end"><?php echo $row["order_total"]; ?></td>
+
+                            <td class="">
+                                <?php
+foreach ($cartitems as $item_id) {
+            $sql2 = "SELECT item_name,variant from product where item_id=$item_id->itemid";
+            $result2 = $db_conn->query($sql2) or die($db_conn->error);
+            if ($result2->num_rows == 1) {
+                $row2 = $result2->fetch_assoc();
+                ?>
+                                <div class=""><?php echo $row2["item_name"] . "(" . $row2['variant'] . ")"; ?></div>
+                                <?php
+}
+        }
+        ?>
+                            </td>
+                            <td class="">
+                                <?php
+foreach ($cartitems as $item_id) {
+            //$sql2 = "SELECT item_name,variant from product where item_id=$item_id->itemid";
+            //$result2 = $db_conn->query($sql2) or die($db_conn->error);
+            //if ($result->num_rows == 1) {
+            //$row2 = $result2->fetch_assoc();
+            ?>
+                                <div class=""><?php echo $item_id->qty; ?></div>
+                                <?php
+}
+        ?>
+                            </td>
+                            <td class="text-end"><?php
+echo $row['carttotal']; ?></td>
                             <td><?php echo $row["timestamp"]; ?></td>
                         </tr>
                         <?php

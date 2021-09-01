@@ -5,7 +5,6 @@ if (isset($_SESSION['logged_in'])) {
 } else {
     require_once "db_connect.php";
 }
-
 ?>
 <!DOCTYPE html>
 
@@ -19,87 +18,145 @@ if (isset($_SESSION['logged_in'])) {
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='../../assets/style/style.css' rel='stylesheet'>
     <link rel="icon" type="image/png" href="../../assets/images/icon.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="../../assets/js/app.js"></script>
+    <script src="../../assets/js/cart.js"></script>
+    <script>
+        /*var time = new Date().getTime();
+        $(document.body).bind("mousemove keypress", function () {
+            time = new Date().getTime();
+        });
+
+        setInterval(function () {
+            if (new Date().getTime() - time >= 15000) {
+                window.location.reload(true);
+            }
+        }, 1000);*/
+    </script>
 </head>
 
 <body>
-    <script type="text/javascript">
-        function getitemdetails() {
-            document.getElementById("availquant").value = document.getElementById("itemselect").value;
-        }
-    </script>
     <h1 class="text-center p-4" style="background-color:#B6C867"><i>New Order</i></h1>
     <?php if (isset($_SESSION['logged_in']) == false) {
     echo "<div class='text-end'>";
-    echo "<a class='btn btn-info rounded-pill mb-2' href='../../'>Shop Portal</a></div>";
+    echo "<a class='btn btn-info bg-gradient rounded-pill mb-2' href='../../'>Shop Portal</a></div>";
 }
-
 ?>
     <div class="container-fluid">
-        <section class="row justify-content-center">
-            <section class="col-md-8 col-lg-8 col-xl-10 col-xxl-10 rounded" style="background-color:#DBE6FD">
-                <form class="p-1 p-sm-4 mb-1" method="POST" action="neworder.php">
-                    <div class="row d-flex justify-content-between">
-                        <div class="p-1 col-8 col-sm-6 mb-3">
-                            <label class="fw-bold">Customer Name</label>
-                            <input class="form-control border border-dark rounded" type="text" name="customername"
-                                autofocus placeholder="Enter Customer Name" required>
-                        </div>
-                    </div>
-                    <div class="row align-items-center  d-flex justify-content-between">
-                        <div class="px-1 col-6 mb-3">
-                            <label class="fw-bold">Customer Address</label>
-                            <textarea class="form-control border border-dark rounded" rows="3" name="customeraddr"
-                                placeholder="Enter Customer Address" required></textarea>
-                        </div>
+    <div class="">
+            <button type="button" class="btn btn-dark bg-gradient rounded-pill" onclick="emptycart()">New Order/Delete Cart</button>
+        </div>
+        <div class="mt-2 align-items-center d-flex flex-row-reverse">
 
-                        <div class="px-1 col-6 col-sm-5 col-md-5 col-lg-4 mb-3">
-                            <label class="fw-bold">Customer Phone</label>
-                            <input class="form-control border border-dark rounded" type="text" name="customerphn"
-                                placeholder="Enter Phone no." required minlength="10" maxlength="10" size="10"
-                                pattern="\d{10}">
+            <a class="cart btn btn-warning bg-gradient d-inline-flex" href="../orders/cartcheckout.php">Cart
+                <div class="position-relative">
+                    <i class="fas fa fa-shopping-cart fa-lg"></i>
+                    <span id="incartcount"
+                        class="text-black cart-basket d-flex align-items-center justify-content-center"></span>
+                </div>
+            </a>
+            <marquee behavior="alternate" class="rainbow fw-bold" style="width:200px;"><i
+                    class="fas fa-star"></i>Checkout Here!>></marquee>
+        </div>
+        <div class="d-md-inline-flex mt-1">
+            <section class="" style="min-width:15%;">
+                <nav class="navbar navbar-expand-xl navbar-light">
+                    <div class="container-fluid d-block">
+                        <div class="d-inline-flex">
+                            <div class="navbar-brand">Categories</div>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse2" aria-controls="collapse2" aria-expanded="false"
+                                aria-label="Toggl4 navigation">
+                                <span class="fas fa-filter"></span>
+                            </button>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="px-1 col-12 mb-3">
-                            <label class="fw-bold">Choose Item</label>
-                            <?php
-$sql = "SELECT a.*,b.* FROM product a,category b WHERE a.cat_id=b.id ORDER BY a.item_id ASC";
+                        <div class="collapse navbar-collapse" id="collapse2">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-inline-block d-lg-block">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../orders/order.php">All</a>
+                                </li>
+                                <?php
+$sql = "SELECT * FROM category where status=1 ORDER BY name ASC";
 $result = mysqli_query($db_conn, $sql);
-echo "<select class='form-select border border-dark rounded' name='itemsel' id='itemselect' style='cursor:grab' required onchange='getitemdetails()'>";
-echo "<option value=''>Select</option>";
 while ($row = $result->fetch_assoc()) {
-    if ($row['item_status'] == 1 && $row['status'] == 1) {
-        echo "<option value='" . $row['item_id'] . "'>" . $row['item_name'] . '  --> Avail. Quantity: ' . $row['quantity'] . '  --> Rate: ₹' . $row['unit_price'] . "</option>";
-    }
-
+    ?>
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                        href="../orders/order.php?category=<?php echo $row['id']; ?>"><?php echo $row["name"]; ?>
+                                    </a>
+                                </li>
+                                <?php
 }
-echo "</select>";
-$db_conn->close();
 ?>
+                            </ul>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="px-1 col-12 mb-3">
-                            <label class="fw-bold">Item ID</label>
-                            <input class="form-control border border-dark rounded" type="number" id="availquant"
-                                readonly placeholder="Select Item" style="cursor:no-drop">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="px-1 col-5 col-md-4 mb-3">
-                            <label class="fw-bold">Required Quantity</label>
-                            <input class="form-control border border-dark rounded" type="number" name="reqquant"
-                                required pattern="\d" min="1" placeholder="Enter req. quantity">
-                        </div>
-                    </div>
-                    <button class="col-12 btn btn-primary" type="submit" name="subbmit" value="Submit">Confirm
-                        Order</button>
-                </form>
+                </nav>
             </section>
-        </section>
+            <section class="px-md-4">
+                <div class="row">
+                    <?php
+$sql = "";
+if (isset($_GET['category'])) {
+    $cat = $_GET['category'];
+    $sql = "SELECT * FROM product WHERE cat_id=$cat";
+} else {
+    $sql = "SELECT a.*,b.* FROM product a,category b WHERE a.cat_id=b.id AND b.status=1 AND a.item_status=1 ORDER BY a.item_id ASC";
+}
+$result = mysqli_query($db_conn, $sql);
+while ($row = $result->fetch_assoc()) {
+    ?>
+                    <div class="col-6 col-sm-4 col-md-4 mb-2">
+                        <div class="border border-start-0 p-1 rounded-3 position-relative">
+
+                            <div>
+                                <span class="position-absolute float-start rounded alert-success fw-bold px-1"
+                                    id="<?php echo 'incart' . $row["item_id"]; ?>"></span>
+                                <?php
+if ($row['quantity'] == 0) {
+        echo "<span class='position-absolute float-start rounded alert-danger fw-bold px-1'>Out-of-Stock</span>";
+    }
+    ?>
+                                <div class="text-center">
+                                    <img height="100" width="100" src="<?php echo $row['picturefilepath']; ?>" />
+                                </div>
+                                <div><?php echo $row['item_name']; ?></div>
+                            </div>
+                            <div
+                                class="variant me-1 mt-1 p-1 text-center bg-secondary text-white fw-bold rounded-circle">
+                                <?php echo $row['variant']; ?></div>
+                            <div class="fw-bold"><i class="fas fa-rupee-sign me-1"></i><?php echo $row['unit_price']; ?>
+                            </div>
+                            <div class="bg-info d-none">In-Stock: <span
+                                    id="<?php echo 'quantity' . $row["item_id"]; ?>"><?php echo $row['quantity']; ?></span>
+                            </div>
+                            <div class="mt-2 d-flex align-items-center justify-content-evenly">
+                                <button type="button" id="<?php echo $row['item_id']; ?>" class="btn removecartbtn"
+                                    onclick="removefromcart('<?php echo $row['item_id']; ?>')"><span
+                                        class="fas fa-minus"></span>
+                                </button>
+                                <div class="text-center d-inline">In-Cart:<span
+                                        id="<?php echo 'cartvalue' . $row["item_id"]; ?>">0</span>
+                                </div>
+                                <button type="button" id="<?php echo $row['item_id']; ?>" class="btn addcartbtn"
+                                    onclick="addtocart('<?php echo $row['item_id']; ?>')"><span
+                                        class="fas fa-plus"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+}
+?>
+                </div>
+            </section>
+        </div>
     </div>
-    <?php
-require_once "footer.php";?>
+    <div id="incartcount6" class="text-center"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
