@@ -7,8 +7,8 @@ function preview_image(event) {
     reader.readAsDataURL(event.target.files[0]);
 }
 
-$(document).ready(function(){
-    $('img').bind('contextmenu', function(){
+$(document).ready(function () {
+    $('img').bind('contextmenu', function () {
         return false;
     });
 });
