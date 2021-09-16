@@ -29,7 +29,7 @@ if (isset($_SESSION['logged_in'])) {
       <div class="container-fluid">
         <a class="navbar-brand " href="../management">
           <img src="../../assets/images/icon.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-          Inventory Control System
+          LIFE <i class="fab fa-internet-explorer fa-xs"></i> Shop
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
