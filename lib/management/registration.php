@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
             if (isset($_SESSION['logged_in'])) {
                 ?><script>
                 window.alert("New User Added Successfully.");
-                window.location.href=("../admin/users.php");
+                window.location.href=("../management/users.php");
                 </script>
                 <?php
 } else {
