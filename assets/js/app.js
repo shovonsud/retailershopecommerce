@@ -7,6 +7,10 @@ function preview_image(event) {
     reader.readAsDataURL(event.target.files[0]);
 }
 
+function vieworder(id) {
+    window.location.href = "../orders/view_order.php?orderid=" + id;
+}
+
 $(document).ready(function () {
     $('img').bind('contextmenu', function () {
         return false;
