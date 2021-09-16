@@ -21,6 +21,7 @@ if (isset($_POST["cartsubmit"]) == true) {
     $carttotal = validate($_POST['carttotal']);
     $custphn = validate($_POST['customerphn']);
     $cartitems = array();
+    $cartstatus = 0;
     if (isset($_SESSION['cart'])) {
         foreach ($_SESSION['cart'] as $itemid => $value) {
             array_push($cartitems, array("itemid" => $itemid, "qty" => $value['qty']));
@@ -28,8 +29,11 @@ if (isset($_POST["cartsubmit"]) == true) {
             $sql2 = "UPDATE product SET quantity=quantity-$qty WHERE item_id=$itemid";
             mysqli_query($db_conn, $sql2);
         }
+        if (isset($_SESSION['logged_in'])) {
+            $cartstatus = 1;
+        }
         $cartitems = json_encode($cartitems);
-        $sql = "INSERT into orders VALUES('','$custname','$custaddr','$custphn','$cartitems',$carttotal,'$date_clicked')";
+        $sql = "INSERT into orders VALUES('','$custname','$custaddr','$custphn','$cartitems',$carttotal,$cartstatus,'$date_clicked')";
         if (mysqli_query($db_conn, $sql)) {
             unset($_SESSION['cart']);
             header("Location:../orders/order.php");

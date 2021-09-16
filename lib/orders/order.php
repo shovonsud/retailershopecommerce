@@ -22,18 +22,6 @@ if (isset($_SESSION['logged_in'])) {
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="../../assets/js/app.js"></script>
     <script src="../../assets/js/cart.js"></script>
-    <script>
-        /*var time = new Date().getTime();
-        $(document.body).bind("mousemove keypress", function () {
-            time = new Date().getTime();
-        });
-
-        setInterval(function () {
-            if (new Date().getTime() - time >= 15000) {
-                window.location.reload(true);
-            }
-        }, 1000);*/
-    </script>
 </head>
 
 <body>
@@ -44,8 +32,9 @@ if (isset($_SESSION['logged_in'])) {
 }
 ?>
     <div class="container-fluid">
-    <div class="">
-            <button type="button" class="btn btn-dark bg-gradient rounded-pill" onclick="emptycart()">New Order/Delete Cart</button>
+        <div class="">
+            <button type="button" class="btn btn-dark bg-gradient rounded-pill" onclick="emptycart()">New Order/Delete
+                Cart</button>
         </div>
         <div class="mt-2 align-items-center d-flex flex-row-reverse">
 
@@ -100,22 +89,22 @@ while ($row = $result->fetch_assoc()) {
 $sql = "";
 if (isset($_GET['category'])) {
     $cat = $_GET['category'];
-    $sql = "SELECT * FROM product WHERE cat_id=$cat";
+    $sql = "SELECT * FROM product WHERE cat_id=$cat ORDER BY quantity DESC,item_id ASC";
 } else {
-    $sql = "SELECT a.*,b.* FROM product a,category b WHERE a.cat_id=b.id AND b.status=1 AND a.item_status=1 ORDER BY a.item_id ASC";
+    $sql = "SELECT a.*,b.* FROM product a,category b WHERE a.cat_id=b.id AND b.status=1 AND a.item_status=1 ORDER BY quantity DESC,a.item_id ASC";
 }
 $result = mysqli_query($db_conn, $sql);
 while ($row = $result->fetch_assoc()) {
     ?>
-                    <div class="col-6 col-sm-4 col-md-4 mb-2">
-                        <div class="border border-start-0 p-1 rounded-3 position-relative">
+                    <div class="col-6 col-sm-4 col-md-3 mb-2">
+                        <div class="border border-start-0 p-1 rounded-3 position-relative" style="min-height:230px !important;">
 
                             <div>
                                 <span class="position-absolute float-start rounded alert-success fw-bold px-1"
                                     id="<?php echo 'incart' . $row["item_id"]; ?>"></span>
                                 <?php
 if ($row['quantity'] == 0) {
-        echo "<span class='position-absolute float-start rounded alert-danger fw-bold px-1'>Out-of-Stock</span>";
+        echo "<span class=' position-absolute mx-auto outofstock rounded alert-danger fw-bold px-1'>Out of Stock</span>";
     }
     ?>
                                 <div class="text-center">
@@ -131,19 +120,25 @@ if ($row['quantity'] == 0) {
                             <div class="bg-info d-none">In-Stock: <span
                                     id="<?php echo 'quantity' . $row["item_id"]; ?>"><?php echo $row['quantity']; ?></span>
                             </div>
-                            <div class="mt-2 d-flex align-items-center justify-content-evenly">
-                                <button type="button" id="<?php echo $row['item_id']; ?>" class="btn removecartbtn"
-                                    onclick="removefromcart('<?php echo $row['item_id']; ?>')"><span
-                                        class="fas fa-minus"></span>
-                                </button>
-                                <div class="text-center d-inline">In-Cart:<span
-                                        id="<?php echo 'cartvalue' . $row["item_id"]; ?>">0</span>
-                                </div>
-                                <button type="button" id="<?php echo $row['item_id']; ?>" class="btn addcartbtn"
-                                    onclick="addtocart('<?php echo $row['item_id']; ?>')"><span
-                                        class="fas fa-plus"></span>
-                                </button>
+                            <?php
+if ($row['quantity'] > 0) {
+        ?>
+                            <div class="mt-2 d-flex flex-row-reverse">
+                                <section class="d-flex align-items-center">
+                                    <button type="button" id="<?php echo $row['item_id']; ?>" class="btn removecartbtn"
+                                        onclick="removefromcart('<?php echo $row['item_id']; ?>')"><span
+                                            class="fas fa-minus"></span>
+                                    </button>
+                                    <div class="border rounded p-1 bg-info mx-2"><span class="fw-bold p-2"
+                                            id="<?php echo 'cartvalue' . $row["item_id"]; ?>">0</span></div>
+                                    <button type="button" id="<?php echo $row['item_id']; ?>" class="btn addcartbtn"
+                                        onclick="addtocart('<?php echo $row['item_id']; ?>')"><span
+                                            class="fas fa-plus"></span>
+                                    </button>
                             </div>
+                            <?php
+}
+    ?>
                         </div>
                     </div>
                     <?php
