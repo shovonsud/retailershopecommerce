@@ -4,22 +4,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-a:hover {
-    border-color: black !important;
-}
-
-th {
-
-    position: sticky;
-    top: 0;
-
-}
-
-.tablerep {
-    overflow-y: auto;
-    height: 700px;
-}
-
+/*              Scrollbar Styling               */
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -39,16 +24,40 @@ th {
     background: #555;
 }
 
+a:hover {
+    border-color: black !important;
+}
+
+/* Table properties*/
+th {
+
+    position: sticky;
+    top: 0;
+
+}
+
+table tbody tr:hover {
+    background-color: #ffd1b3 !important;
+}
+
+.tablerep {
+    overflow-y: auto;
+    height: 700px;
+
+}
+
+.tableshadow {
+    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.73);
+    -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.73);
+    -moz-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.73);
+}
+
 input[type="file"] {
     display: none !important;
 }
 
 #picuploadalert {
     color: #DD0004 !important;
-}
-
-table tbody tr:hover {
-    background-color: #ffd1b3 !important;
 }
 
 .variant {
@@ -58,11 +67,14 @@ table tbody tr:hover {
     right: 0;
 }
 
-.itemstatusalert {
-    position: absolute !important;
-    float: left !important;
-    top: 0;
-    left: 0;
+.outofstock {
+    top: 50% !important;
+    /* position the top  edge of the element at the middle of the parent */
+    left: 50% !important;
+    /* position the left edge of the element at the middle of the parent */
+
+    transform: translate(-50%, -50%) !important;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
 .rainbow {
@@ -219,7 +231,6 @@ table tbody tr:hover {
     }
 }
 
-
 .cart-basket {
     font-size: .6rem;
     position: absolute;
@@ -242,4 +253,15 @@ table tbody tr:hover {
 
 #carttable tr td:first-child::before {
     content: counter(rowNumber);
+}
+
+.hoveritem:hover {
+    cursor: grabbing;
+    background-color: rgb(0, 0, 0) !important;
+    color: whitesmoke;
+}
+
+.vieworderfield {
+    background-color: lightgreen !important;
+    cursor: no-drop;
 }
