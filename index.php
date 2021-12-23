@@ -9,19 +9,18 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="icon" type="image/png" href="../../assets/images/icon.png">
     <link href='assets/style/style.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Portal</title>
-    <style>
-        #mgmtport:hover{
-            background-color:#A2DBFA !important;
-        }
-        #custport:hover{
-            background-color:#FFE867 !important;
-        }
-        </style>
 </head>
 
 <body style="background-color:#DEEDF0">
     <div class="container">
+        <div class="navbar-brand text-center mt-5" style="font-size:50px">
+            <img src="./assets/images/icon.png" alt="" width="50" height="50" class="d-inline-block align-text-top">
+            LIFE <i class="fab fa-internet-explorer fa-xs"></i> Shop
+        </div>
         <div class="position-absolute top-50 start-50 translate-middle">
             <div
                 class="justify-content-evenly text-center align-items-center gap-2 gap-lg-5 gap-md-3 d-sm-flex d-md-flex d-lg-inline-flex d-xl-inline-flex d-xxl-inline-flex">

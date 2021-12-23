@@ -3,6 +3,13 @@
 * {
     font-family: 'Poppins', sans-serif;
 }
+#mgmtport:hover {
+    background-color: #A2DBFA !important;
+}
+
+#custport:hover {
+    background-color: #FFE867 !important;
+}
 
 /*              Scrollbar Styling               */
 ::-webkit-scrollbar {
