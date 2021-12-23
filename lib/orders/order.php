@@ -96,8 +96,8 @@ if (isset($_GET['category'])) {
 $result = mysqli_query($db_conn, $sql);
 while ($row = $result->fetch_assoc()) {
     ?>
-                    <div class="col-6 col-sm-4 col-md-3 mb-2">
-                        <div class="border border-start-0 p-1 rounded-3 position-relative" style="min-height:230px !important;">
+                    <div class="col-6 col-sm-4 col-md-3 offset-md-1 mb-5 shadow" style="background-color:#F4F9F9;">
+                        <div class="p-1 rounded-3 position-relative" style="min-height:230px !important;background-color:#F4F9F9;">
 
                             <div>
                                 <span class="position-absolute float-start rounded alert-success fw-bold px-1"
