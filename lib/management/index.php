@@ -17,7 +17,7 @@ require_once "management_panel.php";
                 <div class="h4">Kiosk Orders</div>
                 <div class="tablerep table-responsive tableshadow" style="max-height:50%;min-width:20%">
                     <table class="table table-hover table-striped">
-                        <thead class="table-info">
+                        <thead class="table-info sticky-top">
                             <tr>
                                 <th scope="col">Order ID</th>
                                 <th scope="col">Customer Name</th>
