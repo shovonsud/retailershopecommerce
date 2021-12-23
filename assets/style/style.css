@@ -265,3 +265,9 @@ input[type="file"] {
     background-color: lightgreen !important;
     cursor: no-drop;
 }
+
+.shadow{
+    box-shadow: 0px 0px 14px 15px rgba(0,0,0,0.72);
+    -webkit-box-shadow: 0px 0px 14px 15px rgba(0,0,0,0.72);
+    -moz-box-shadow: 0px 0px 14px 15px rgba(0,0,0,0.72);
+}
