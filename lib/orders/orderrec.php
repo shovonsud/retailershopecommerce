@@ -1,6 +1,5 @@
 <?php
 require_once "management_panel.php";
-require_once "../orders/cartsystem.php";
 ?>
 <!DOCTYPE html>
 
@@ -35,7 +34,9 @@ if ($result->num_rows > 0) {
         $cartitems = json_decode($row['order_cart']);
         ?>
                         <tr>
-                            <td><a href="../orders/view_order.php?orderid=<?php echo $row['order_id']; ?>"><?php echo $row["order_id"]; ?></a></td>
+                            <td class="text-start"><a
+                                    href="../orders/view_order.php?orderid=<?php echo $row['order_id']; ?>">#<?php echo $row["generated_id"]; ?></a>
+                            </td>
                             <td><?php echo $row["cust_name"]; ?></td>
                             <td><?php echo $row["cust_addr"]; ?></td>
                             <td><?php echo $row["cust_phn"]; ?></td>
@@ -48,7 +49,8 @@ foreach ($cartitems as $item_id) {
             if ($result2->num_rows == 1) {
                 $row2 = $result2->fetch_assoc();
                 ?>
-                                <div class="text-start"><?php echo $row2["item_name"] . "(" . $row2['variant'] . ")"; ?></div>
+                                <div class="text-start"><?php echo $row2["item_name"] . "(" . $row2['variant'] . ")"; ?>
+                                </div>
                                 <?php
 }
         }

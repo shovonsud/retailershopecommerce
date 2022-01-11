@@ -20,7 +20,6 @@ require_once "management_panel.php";
                         <thead class="table-info sticky-top">
                             <tr>
                                 <th scope="col">Order ID</th>
-                                <th scope="col">Customer Name</th>
                                 <th scope="col">Items</th>
                                 <th scope="col">Total</th>
                                 <th scope="col">Action</th>
@@ -28,15 +27,15 @@ require_once "management_panel.php";
                         </thead>
                         <tbody style="max-height:10%;">
                             <?php
-$sql = "SELECT order_id,cust_name,order_cart,carttotal FROM orders WHERE order_attended=0 ORDER BY order_id ASC";
+$sql = "SELECT order_id,generated_id,cust_name,order_cart,carttotal FROM orders WHERE order_attended=0 ORDER BY order_id ASC";
 $result = mysqli_query($db_conn, $sql);
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         $cartitems = json_decode($row['order_cart']);
         ?>
                             <tr>
-                                <td><?php echo $row['order_id']; ?></td>
-                                <td><?php echo $row['cust_name']; ?></td>
+                                <td>#<?php echo $row['generated_id']; ?>
+                                <br><?php echo $row['cust_name']; ?></td>
                                 <td class="">
                                     <ol class="list-group list-group-numbered">
                                         <?php
@@ -65,12 +64,12 @@ foreach ($cartitems as $item_id) {
                                 </td>
                                 <td><i class="fas fa-rupee-sign me-1"> <?php echo $row['carttotal']; ?></i></td>
                                 <td class="">
-                                    <div class="d-flex gap-2">
+                                    <div class="d-flex">
                                         <button type="button" class="btn btn-primary"
                                             onclick="vieworder(<?php echo $row['order_id']; ?>)"><i
                                                 class="far fa-eye"></i></button>
-                                        <button type="button" class="btn btn-danger"><i
-                                                class="far fa-trash-alt"></i></button>
+                                        <!-- <button type="button" class="btn btn-danger"><i
+                                                class="far fa-trash-alt"></i></button> -->
                                     </div>
                                 </td>
                             </tr>

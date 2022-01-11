@@ -46,7 +46,6 @@ if (isset($_SESSION['logged_in'])) {
                                 <textarea class="form-control border border-dark rounded" rows="3" name="customeraddr"
                                     placeholder="Enter Customer Address"></textarea>
                             </div>
-
                             <div class="px-1 col-6 col-sm-5 col-md-5 col-lg-4 mb-3">
                                 <label class="fw-bold">Customer Phone</label>
                                 <input class="form-control border border-dark rounded" type="text" name="customerphn"
@@ -56,7 +55,7 @@ if (isset($_SESSION['logged_in'])) {
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table id="carttable" class="table caption-top table-secondary table-hover">
+                        <table id="carttable" class="table caption-top table-light rounded-pill p-1 table-hover">
                             <caption>Your cart</cption>
                             <thead>
                                 <tr>
@@ -88,8 +87,8 @@ if (isset($_SESSION['cart'])) {
                                     <td><?php echo $row['variant']; ?></td>
                                     <td><i class="fas fa-rupee-sign"></i> <?php echo $row['unit_price']; ?></td>
                                     <td><?php echo $_SESSION['cart'][$itemid]['qty']; ?></td>
-                                    <td class="table-success"><i class="fas fa-rupee-sign"></i>
-                                        <?php echo $row['unit_price'] * $_SESSION['cart'][$itemid]['qty']; ?>
+                                    <td class="table-success fw-bold"><i class="fas fa-rupee-sign"></i>
+                                        <?php echo number_format($row['unit_price'] * $_SESSION['cart'][$itemid]['qty'],2); ?>
                                     </td>
                                 </tr>
                                 <?php
@@ -104,21 +103,38 @@ if (isset($_SESSION['cart'])) {
                     </div>
                     <div class="position-relative">
                         <div class="float-end">
-                        <label for="carttotal" class="fw-bold"><h2>Total</h2></label>
+                            <label for="carttotal" class="fw-bold">
+                                <h2>Total</h2>
+                            </label>
                             <div class="input-group border border-dark rounded" style="width:200px;">
                                 <span class="input-group-text"><i class="fas fa-rupee-sign"></i></span>
-                                <input class="form-control fw-bold text-end" id="carttotal" type="number" name="carttotal" readonly required
-                                    placeholder="Cart Total" value="<?php echo $carttotal; ?>" />
-
+                                <input class="form-control fw-bold text-end fs-4" id="carttotal" type="number"
+                                    name="carttotal" readonly required placeholder="Cart Total"
+                                    value="<?php echo number_format($carttotal,2); ?>" />
                             </div>
                         </div>
                         <br><br><br><br>
                     </div>
+                    <div class="d-flex gap-3">
+                        <div class="h4">Payment Method</div>
+                        <div class="">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentmethod" id="cashmethod"
+                                    value="Cash" required>
+                                <label class="form-check-label fw-bold" for="cashmethod">Cash</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentmethod" id="onlinemethod"
+                                    value="Online" required>
+                                <label class="form-check-label fw-bold" for="onlinemethod">Online(Wallet/UPI/Debit
+                                    Card)</label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="d-flex flex-row-reverse gap-3">
-                        <button class="btn btn-success" type="submit" name="cartsubmit">Confirm purchase</button>
+                        <button class="btn btn-success" type="submit" name="cartsubmit">Proceed</button>
                         <a href="../orders/order.php" class="btn btn-warning"><i class="far fa-hand-point-left"></i> Go
                             back</a>
-
                     </div>
                 </form>
             </section>
